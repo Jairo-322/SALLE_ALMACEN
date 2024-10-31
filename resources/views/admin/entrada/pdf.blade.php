@@ -100,6 +100,7 @@
         <div class="container"> 
             <div class="card-body"> 
                 <h2 style="text-align: center; margin-top: 0;">Lista de Entradas</h2> 
+                <p style="text-align: center;">Fecha de creación: {{ date('d/m/Y') }}</p>
                 <table> 
                     <thead> 
                         <tr> 

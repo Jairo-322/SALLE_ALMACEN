@@ -100,6 +100,7 @@
         <div class="container"> 
             <div class="card-body"> 
                 <h2 style="text-align: center; margin-top: 0;">Lista de salidas</h2> 
+                <p style="text-align: center;">Fecha de creación: {{ date('d/m/Y') }}</p>
                 <table> 
                     <thead> 
                         <tr> 
@@ -123,11 +124,6 @@
                             <td>{{ $salida->fecha_salida }}</td> 
                             <td>{{ $salida->destino }}</td>
                             <td>{{$salida->condicion}}</td>
-                            
-                            
-                            
-                            
-                           
                             <td>{{ $salida->fecha_retorno }}</td>
                         </tr> 
                         @endforeach 

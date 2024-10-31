@@ -179,7 +179,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="apellidos{{ $personas->dni }}">Apellidos</label>
-                                            <input type="text" class="form-control to-uppercase" name="apellidos" id="apellidos{{ $personas->dni }}" autocomplete="off" value="{{ $personas->apellidos }}" pattern="[A-Za-zÁÉÍÓÚÑ\s]+" required>
+                                            <input type="text" class="form-control to-uppercase" name="apellidos" id="apellidos{{ $personas->dni }}" autocomplete="off" value="{{ $personas->apellidos }}" pattern="[A-Za-zÀ-ÿ\s]+" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="nro_celular{{ $personas->dni }}">Nro. Celular</label>

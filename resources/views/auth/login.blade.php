@@ -186,7 +186,7 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <label for="email">Correo Electrónico</label>
-                    <input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username">
+                    <input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="off">
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
 
                     <label for="password">Contraseña</label>
