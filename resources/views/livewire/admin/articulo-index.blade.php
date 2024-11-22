@@ -53,7 +53,7 @@
                         <div class="form-group">
                             <label for="estado">Estado*</label>
                             <select class="form-control to-uppercase" name="estado" id="estado" required>
-                                <option value="BUENAS CONDICIONES" disabled selected>Seleccione el estado</option>
+                                {{-- <option value="" disabled selected>Seleccione el estado</option> --}}
                                 <option value="BUENAS CONDICIONES">BUENAS CONDICIONES</option>
                                 <option value="NUEVO">MALAS CONDICIONES</option>
                                 <option value="USADO">NECESITA REPARACION</option>

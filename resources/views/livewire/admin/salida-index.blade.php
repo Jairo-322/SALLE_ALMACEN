@@ -111,7 +111,7 @@
                         <div class="form-group">
                             <label for="condicion">Estado*</label>
                             <select class="form-control" name="condicion" id="condicion" required>
-                                <option value="" disabled selected>Seleccione el estado</option>
+                                {{-- <option value="" disabled selected>Seleccione el estado</option> --}}
                                 <option value="BUENAS CONDICIONES">BUENAS CONDICIONES</option>
                                 <option value="NUEVO">NUEVO</option>
                                 <option value="USADO">USADO</option>
