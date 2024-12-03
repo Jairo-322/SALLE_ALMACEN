@@ -51,11 +51,11 @@
                     }
                 }
             });
-    
+
             $('#btnFiltrar').on('click', function() {
                 var fecha_salida = $('#fecha_salida').val();
                 var fecha_retorno = $('#fecha_retorno').val();
-    
+
                 if (fecha_salida && fecha_retorno) {
                     $.ajax({
                         url: '{{ route('salidas.filter') }}',
@@ -67,7 +67,7 @@
                         success: function(data) {
                             // Limpiar la tabla antes de actualizar
                             table.clear().draw();
-    
+
                             if (data.message) {
                                 alert(data.message);
                             } else {
@@ -76,7 +76,7 @@
                                     var devolucionBtnClass = salida.devuelto ? 'btn-success' : 'btn-danger';
                                     var devolucionIcon = salida.devuelto ? 'fa-check' : 'fa-times';
                                     var disabledAttribute = salida.devuelto ? 'disabled' : '';
-    
+
                                     var rowNode = table.row.add([
                                         salida.id,
                                         salida.persona.dni + ": " + salida.persona.nombres + " " + salida.persona.apellidos,
@@ -86,19 +86,19 @@
                                         salida.destino,
                                         salida.condicion,
                                         salida.fecha_retorno ? new Date(salida.fecha_retorno).toLocaleDateString() : '', // Mostrar fecha_retorno si existe
-                                        '<a href="" class="btn btn-warning" data-toggle="modal" data-target="#editModal' + salida.id + '"><i class="fas fa-edit"></i></a>',                                    
+                                        '<a href="" class="btn btn-warning" data-toggle="modal" data-target="#editModal' + salida.id + '"><i class="fas fa-edit"></i></a>',
                                         '<form class="devolucion-form" action="{{ route('admin.salida.devoluciones', ':id') }}'.replace(':id', salida.id) + '" method="POST">@csrf<button type="submit" class="btn ' + devolucionBtnClass + '" ' + disabledAttribute + '><i class="fas ' + devolucionIcon + '"></i></button></form>',
-                                        '<form action="{{ route('admin.salida.destroy', ':id') }}" method="POST">@csrf @method('DELETE')<button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button></form>'
+                                        // '<form action="{{ route('admin.salida.destroy', ':id') }}" method="POST">@csrf @method('DELETE')<button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button></form>'
                                     ]).draw(false).node();
                                 });
-    
-                                // Rebind the submit event to the new form elements
+
+                                // Vuelver a vincular el evento de envío a los nuevos elementos del formulario
                                 $('.devolucion-form').on('submit', function(e) {
                                     e.preventDefault();
-    
+
                                     var form = $(this);
                                     var url = form.attr('action');
-    
+
                                     $.ajax({
                                         type: 'POST',
                                         url: url,
@@ -115,7 +115,7 @@
                                                     button.removeClass('btn-danger').addClass('btn-success');
                                                     button.html('<i class="fas fa-check"></i>');
                                                     button.prop('disabled', true); // Deshabilitar el botón
-                                                    
+
                                                     // Actualizar la fecha de retorno en la tabla
                                                     var rowIndex = table.row(form.closest('tr')).index();
                                                     var cellIndex = table.cell(rowIndex, 6).node();
@@ -144,7 +144,7 @@
             });
         });
     </script>
-    
+
 
 
 @stop

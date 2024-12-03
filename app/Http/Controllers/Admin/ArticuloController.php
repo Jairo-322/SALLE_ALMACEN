@@ -103,7 +103,7 @@ class ArticuloController extends Controller
     public function devoluciones(string $id)
     {
         // Encontrar la creacion por su ID
-        $creacion = creacions::find($id);
+        $creacion = Articulos::find($id);
         if (!$creacion) {
             return redirect()->route('admin.creacion.index')->withErrors('La creacion no fue encontrada.');
         }

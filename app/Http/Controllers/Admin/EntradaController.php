@@ -14,10 +14,10 @@ class EntradaController extends Controller
      * Display a listing of the resource.
      */
 
-     public function search(Request $request)
+    public function search(Request $request)
         {
             $query = $request->input('search');
-            $descripciones = Articulo::where('descripcion', 'like', "%$query%")
+            $descripciones = Articulos::where('descripcion', 'like', "%$query%")
                 ->pluck('descripcion');
 
             return response()->json($descripciones);

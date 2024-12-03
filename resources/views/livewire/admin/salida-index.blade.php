@@ -45,7 +45,7 @@
             });
         </script>
     @endif
-    
+
     @if(session('success'))
         <script>
             Swal.fire({
@@ -55,7 +55,7 @@
             });
         </script>
     @endif
-    
+
     @if($errors->any())
         <script>
             Swal.fire({
@@ -159,7 +159,7 @@
                         <button type="button" class="btn btn-secondary ml-auto" id="btnRefrescar">Refrescar</button>
                     </div>
                 </div>
-            </form> 
+            </form>
         </div>
         <div class="card-body">
             <table id="salida" class="table table-bordered table-striped">
@@ -248,12 +248,12 @@
                                             <label for="fecha_retorno{{ $salida->id }}">Fecha Retorno</label>
                                             <input type="date" class="form-control to-uppercase" name="fecha_retorno" id="fecha_retorno{{ $salida->id }}" value="{{ $salida->fecha_retorno }}" readonly style="cursor: default;" required>
                                         </div>
-                                    
+
                                         <div class="form-group">
                                             <label for="destino{{ $salida->id }}">Destino</label>
                                             <input type="text" class="form-control to-uppercase" name="destino" id="destino{{ $salida->id }}" autocomplete="off" value="{{ $salida->destino }}" required>
                                         </div>
-                                        
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                         <button type="submit" class="btn btn-primary">Guardar</button>
@@ -265,29 +265,29 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>   
+        </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
             // Lista de personas y artículos en formato JSON
             const personas = @json($personas);
-            const articulos = @json($articulos);        
+            const articulos = @json($articulos);
             $(document).ready(function() {
                 // Autocompletar personas
                 $('#persona-input').on('input', function() {
                     const query = $(this).val().toLowerCase();
                     const suggestions = $('#persona-suggestions');
-                    suggestions.empty();        
+                    suggestions.empty();
                     if (query.length > 0) {
-                        const filteredPersonas = personas.filter(persona => 
+                        const filteredPersonas = personas.filter(persona =>
                             persona.dni.toLowerCase().includes(query) ||
                             persona.nombres.toLowerCase().includes(query) ||
                             persona.apellidos.toLowerCase().includes(query)
-                        );        
+                        );
                         filteredPersonas.forEach(persona => {
                             const suggestion = $('<div class="autocomplete-suggestion"></div>');
                             suggestion.text(`${persona.dni} : ${persona.nombres} ${persona.apellidos}`);
-                            suggestion.data('dni', persona.dni);       
+                            suggestion.data('dni', persona.dni);
                             suggestion.on('click', function() {
                                 $('#persona-input').val($(this).text());
                                 $('#persona-dni').val($(this).data('dni'));
@@ -375,19 +375,19 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const toUpperCaseFields = document.querySelectorAll('.to-uppercase');
-                
+
                     toUpperCaseFields.forEach(field => {
                         field.addEventListener('input', function() {
                             this.value = this.value.toUpperCase();
                         });
-                    
+
                         field.addEventListener('change', function() {
                             this.value = this.value.toUpperCase();
                         });
                     });
             });
         </script>
-        <script> 
+        <script>
             $(document).ready(function() {
                 function updateButtonText(button) {
                     if (button.hasClass('btn-success')) {
@@ -397,7 +397,7 @@
                         button.html('<i class="fas fa-fw fa-times"></i>');
                     }
                 }
-        
+
                 $('.devolucion-form').on('submit', function(e) {
                     e.preventDefault(); // Evitar el envío normal del formulario
                     var form = $(this);
@@ -429,7 +429,7 @@
                         }
                     });
                 });
-        
+
                 $('#filter-form').on('submit', function(e) {
                     e.preventDefault();
                     var form = $(this);
@@ -464,7 +464,7 @@
                                         '</tr>';
                                     tbody.append(row);
                                 });
-        
+
                                 // Rebind the submit event to the new form elements
                                 $('.devolucion-form').on('submit', function(e) {
                                     e.preventDefault(); // Evitar el envío normal del formulario
@@ -508,7 +508,7 @@
                         }
                     });
                 });
-        
+
                 // Inicializa el texto de los botones al cargar la página
                 $('.devolucion-form button').each(function() {
                     updateButtonText($(this));
