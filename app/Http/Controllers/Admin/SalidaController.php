@@ -175,15 +175,15 @@ public function devoluciones(string $id)
     // Encontrar la salida por su ID
     $salida = Salidas::find($id);
     if (!$salida) {
-        return response()->json(['error' => 'La salida no fue encontrada.'], 404);
+        return redirect()->back()->with('error', 'La salida no fue encontrada.');
     }
 
     // Verificar si el tipo de artículo es 'FUNGIBLE'
     if (strtoupper($salida->tipo) === 'FUNGIBLE') {
-        return response()->json(['error' => 'NO SE PUEDE REALIZAR LA DEVOLUCION DE ARTICULOS FUNGIBLES.'], 400);
+        return redirect()->back()->with('error', 'No se puede realizar la devolución de artículos fungibles.');
     }
 
-    // Si el artículo es fungible, proceder con la devolución
+    // Si el artículo no es fungible, proceder con la devolución
     $articulo = Articulos::findOrFail($salida->articulo_id);
 
     // Incrementar el stock del artículo
@@ -195,7 +195,7 @@ public function devoluciones(string $id)
     $salida->fecha_retorno = now();
     $salida->save();
 
-    return response()->json(['success' => 'Artículo devuelto correctamente y el stock del artículo se actualizó.']);
+    return redirect()->back()->with('success', 'Artículo devuelto correctamente y el stock del artículo se actualizó.');
 }
 
     public function searchArticulos(Request $request)
