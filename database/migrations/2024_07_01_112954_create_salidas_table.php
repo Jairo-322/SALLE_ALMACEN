@@ -29,7 +29,8 @@ return new class extends Migration
             $table->date('fecha_retorno')->nullable();
             $table->text('destino');
             $table->boolean('devuelto')->default(false);
-            $table->string('estado')->default('pending'); // O cualquier estado por defecto que prefieras
+            $table->string('estado')->default('pending');
+            // $table->text('tipo'); // O cualquier estado por defecto que prefieras
             $table->timestamps();
         });
     }

@@ -101,19 +101,15 @@ class PersonaController extends Controller
         $request->validate([
             'file' => 'required|mimes:xlsx,csv'
         ]);
-    
         // Procesar el archivo y usar la clase importadora
         $import = new PersonasImport();
         Excel::import($import, $request->file('file'));
-    
         // Obtener los DNIs duplicados
         $duplicados = $import->getDuplicates();
-    
         // Verificar si hay duplicados y redirigir con un mensaje de error
         if (!empty($duplicados)) {
             return redirect()->back()->withErrors('Los siguientes DNI ya existen: ' . implode(', ', $duplicados));
         }
-    
         // Redirigir con un mensaje de éxito si no hay duplicados
         return redirect()->back()->with('success', 'Personas importadas correctamente.');
     }

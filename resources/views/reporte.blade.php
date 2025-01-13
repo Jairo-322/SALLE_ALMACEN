@@ -112,7 +112,8 @@
                             <th>Cantidad</th> 
                             <th>Fecha Salida</th> 
                             <th>Destino</th>
-                            <th>Fecha Retorno</th>  
+                            <th>Tipo</th> 
+                            <th>Fecha Retorno</th>   
                         </tr>
                     </thead>
                     <tbody>
@@ -127,6 +128,7 @@
                                 <td>{{ $item->cantidad }}</td>
                                 <td>{{ $item->fecha_salida }}</td>
                                 <td>{{ $item->destino }}</td>
+                                <td>{{ $item->tipo }}</td>
                                 <td>{{ $item->fecha_retorno }}</td>
                                 <!-- Otros campos que quieras mostrar -->
                             </tr>

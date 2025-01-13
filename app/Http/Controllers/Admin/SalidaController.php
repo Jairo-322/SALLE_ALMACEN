@@ -87,6 +87,7 @@ class SalidaController extends Controller
             'fecha_salida' => 'required|date',
             'destino' => 'required',
             'fecha_retorno' => 'nullable|date',
+            'tipo' => 'required',
         ]);
     
         // Verificar el stock disponible del artículo
@@ -104,6 +105,7 @@ class SalidaController extends Controller
         $salida->fecha_salida = $validateData['fecha_salida'];
         $salida->destino = $validateData['destino'];
         $salida->fecha_retorno = $validateData['fecha_retorno'] ?? null;
+        $salida->tipo = $validateData['tipo'];
         $salida->save();
     
         // Actualizar el stock del artículo
@@ -127,6 +129,7 @@ class SalidaController extends Controller
             'fecha_salida' => 'required',
             'destino' => 'required',
             'fecha_retorno' => 'nullable|date',
+            'tipo' => 'required',
         ]);
     
         $salida = Salidas::findOrFail($id);
@@ -137,6 +140,7 @@ class SalidaController extends Controller
         $salida->fecha_salida = $validateData['fecha_salida'];
         $salida->destino = $validateData['destino'];
         $salida->fecha_retorno = $validateData['fecha_retorno'] ?? null;
+        $salida->tipo = $validateData['tipo'];
     
         $salida->save();
     
@@ -166,28 +170,33 @@ class SalidaController extends Controller
 }
 
 
-    public function devoluciones(string $id)
-    {
-        // Encontrar la salida por su ID
-        $salida = Salidas::find($id);
-        if (!$salida) {
-            return response()->json(['error' => 'La salida no fue encontrada.'], 404);
-        }
-    
-        // Encontrar el artículo asociado
-        $articulo = Articulos::findOrFail($salida->articulo_id);
-    
-        // Incrementar el stock del artículo
-        $articulo->stock += $salida->cantidad;
-        $articulo->save();
-    
-        // Marcar la salida como devuelta y actualizar la fecha de retorno
-        $salida->devuelto = true;
-        $salida->fecha_retorno = now();
-        $salida->save();
-    
-        return response()->json(['success' => 'Artículo devuelto correctamente y el stock del artículo se actualizó.']);
+public function devoluciones(string $id)
+{
+    // Encontrar la salida por su ID
+    $salida = Salidas::find($id);
+    if (!$salida) {
+        return response()->json(['error' => 'La salida no fue encontrada.'], 404);
     }
+
+    // Verificar si el tipo de artículo es 'FUNGIBLE'
+    if (strtoupper($salida->tipo) === 'FUNGIBLE') {
+        return response()->json(['error' => 'NO SE PUEDE REALIZAR LA DEVOLUCION DE ARTICULOS FUNGIBLES.'], 400);
+    }
+
+    // Si el artículo es fungible, proceder con la devolución
+    $articulo = Articulos::findOrFail($salida->articulo_id);
+
+    // Incrementar el stock del artículo
+    $articulo->stock += $salida->cantidad;
+    $articulo->save();
+
+    // Marcar la salida como devuelta y actualizar la fecha de retorno
+    $salida->devuelto = true;
+    $salida->fecha_retorno = now();
+    $salida->save();
+
+    return response()->json(['success' => 'Artículo devuelto correctamente y el stock del artículo se actualizó.']);
+}
 
     public function searchArticulos(Request $request)
     {

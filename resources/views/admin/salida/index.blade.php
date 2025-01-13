@@ -85,7 +85,8 @@
                                         salida.fecha_salida,
                                         salida.destino,
                                         salida.condicion,
-                                        salida.fecha_retorno ? new Date(salida.fecha_retorno).toLocaleDateString() : '', // Mostrar fecha_retorno si existe
+                                        salida.fecha_retorno ? new Date(salida.fecha_retorno).toLocaleDateString() : '',
+                                        salida.tipo, // Mostrar fecha_retorno si existe
                                         '<a href="" class="btn btn-warning" data-toggle="modal" data-target="#editModal' + salida.id + '"><i class="fas fa-edit"></i></a>',
                                         '<form class="devolucion-form" action="{{ route('admin.salida.devoluciones', ':id') }}'.replace(':id', salida.id) + '" method="POST">@csrf<button type="submit" class="btn ' + devolucionBtnClass + '" ' + disabledAttribute + '><i class="fas ' + devolucionIcon + '"></i></button></form>',
                                         // '<form action="{{ route('admin.salida.destroy', ':id') }}" method="POST">@csrf @method('DELETE')<button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button></form>'

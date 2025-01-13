@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\PersonaController;
 use App\Http\Controllers\Admin\SalidaController;
 
 
-Route::resource('home', HomeController::class)->only(['index', 'edit', 'update'])->names('admin.home')->middleware('can:admin.home.index');;
+Route::resource('home', HomeController::class)->only(['index', 'edit', 'update'])->names('admin.home')->middleware('can:admin.home.index');
 
 Route::resource('articulos', ArticuloController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.articulo')->middleware('can:admin.articulo.index');
 Route::get('/admin/articulos/pdf', [ArticuloController::class, 'pdf'])->name('articulo.pdf');

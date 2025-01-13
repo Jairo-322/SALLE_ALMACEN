@@ -95,19 +95,19 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="cantidad">Cantidad*</label>
                             <input type="number" class="form-control" name="cantidad" id="cantidad" placeholder="Ingrese la cantidad" autocomplete="off" required>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="fecha_salida">Fecha de Salida*</label>
                             <input type="date" class="form-control" name="fecha_salida" id="fecha_salida" placeholder="Ingrese la fecha de salida" required>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="condicion">Estado*</label>
                             <select class="form-control" name="condicion" id="condicion" required>
@@ -115,6 +115,16 @@
                                 <option value="BUENAS CONDICIONES">BUENAS CONDICIONES</option>
                                 <option value="NUEVO">NUEVO</option>
                                 <option value="USADO">USADO</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="Tipo">Tipo*</label>
+                            <select class="form-control" name="tipo" id="tipo" required>
+                                {{-- <option value="" disabled selected>Seleccione el estado</option> --}}
+                                <option value="NO-FUNGIBLE">NO-FUNGIBLE</option>
+                                <option value="FUNGIBLE">FUNGIBLE</option>
                             </select>
                         </div>
                     </div>
@@ -173,6 +183,7 @@
                         <th>Destino</th>
                         <th>Estado</th>
                         <th>Fecha Retorno</th>
+                        <th>Tipo</th>
                         <th>Editar</th>
                         <th>Devolver</th>
                         {{-- <th>Eliminar</th> --}}
@@ -189,16 +200,20 @@
                         <td>{{ $salida->destino }}</td>
                         <td>{{$salida->condicion}}</td>
                         <td>{{ $salida->fecha_retorno }}</td>
+                        <td>{{ $salida->tipo }}</td>
                         <td width="10px">
                             <a href="" class="btn btn-warning" data-toggle="modal" data-target="#editModal{{ $salida->id }}"><i class="fas fa-edit"></i></a>
                         </td>
                         <td>
                             <form class="devolucion-form" action="{{ route('admin.salida.devoluciones', ['id' => $salida->id]) }}" method="POST">
                                 @csrf
-                                <button type="submit" class="btn {{ $salida->devuelto ? 'btn-success' : 'btn-danger' }}">
-                                    <i class="fas {{ $salida->devuelto ? 'fa-check' : 'fa-times' }}"></i>
-                                </button>
-                            </form>
+                            <button 
+                                type="submit" 
+                                class="btn {{ $salida->devuelto ? 'btn-success' : 'btn-danger' }}"
+                                {{ $salida->tipo === 'FUNGIBLE' ? 'disabled' : '' }}>
+                                <i class="fas {{ $salida->devuelto ? 'fa-check' : 'fa-times' }}"></i>
+                            </button>
+                        </form>
                         </td>
                         {{-- <td width="10px">
                             <form action="{{ route('admin.salida.destroy', $salida->id) }}" method="POST">
@@ -247,6 +262,11 @@
                                         <div class="form-group">
                                             <label for="fecha_retorno{{ $salida->id }}">Fecha Retorno</label>
                                             <input type="date" class="form-control to-uppercase" name="fecha_retorno" id="fecha_retorno{{ $salida->id }}" value="{{ $salida->fecha_retorno }}" readonly style="cursor: default;" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tipo{{ $salida->id }}">Tipo</label>
+                                            <input type="text" class="form-control to-uppercase" name="tipo" id="tipo{{ $salida->id }}" value="{{ $salida->tipo }}" disabled>
+                                            <input type="hidden" name="tipo" value="{{$salida->tipo}}">
                                         </div>
 
                                         <div class="form-group">

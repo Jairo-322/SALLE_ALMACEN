@@ -111,7 +111,8 @@
                             <th>Fecha salida</th>
                             <th>Destino</th>
                             <th>Estado</th>
-                            <th>Fecha Retorno</th> 
+                            <th>Tipo</th>
+                            <th>Fecha Retorno</th>  
                         </tr> 
                     </thead> 
                     <tbody> 
@@ -124,6 +125,7 @@
                             <td>{{ $salida->fecha_salida }}</td> 
                             <td>{{ $salida->destino }}</td>
                             <td>{{$salida->condicion}}</td>
+                            <td>{{ $salida->tipo }}</td>
                             <td>{{ $salida->fecha_retorno }}</td>
                         </tr> 
                         @endforeach 
