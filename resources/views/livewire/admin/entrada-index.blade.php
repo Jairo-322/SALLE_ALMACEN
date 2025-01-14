@@ -191,6 +191,7 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function() {
             let debounceTimer;
@@ -272,6 +273,6 @@
         const today = new Date().toISOString().split('T')[0];
         // Asignar la fecha actual al campo de salida
         document.getElementById('fecha_entrada').value = today;
-    </script>
+    </script>    
 </body>
 </html>

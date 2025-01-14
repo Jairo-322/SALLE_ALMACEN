@@ -74,20 +74,15 @@
                                 data.forEach(function(entrada) {
                                     table.row.add([
                                         entrada.id,
-                                        // salida.persona.dni + ": " + salida
-                                        // .persona.nombres + " " + salida.persona
-                                        // .apellidos,
                                         entrada.articulo.nombre_articulo,
                                         entrada.articulo.marca,
                                         entrada.cantidad,
                                         entrada.fecha_entrada,
                                         entrada.descripcion,
-                                        // salida.destino,
-                                        // salida.fecha_retorno,
-                                        // '<a href="" class="btn btn-warning" data-toggle="modal" data-target="#editModal' +
-                                        // salida.id +
-                                        // '"><i class="fas fa-edit"></i></a>',
-                                        '<form action="{{ route('admin.entrada.destroy', ':id') }}" method="POST">@csrf @method('DELETE')<button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button></form>'
+                                        '<form action="' + '{{ route('admin.entrada.destroy', ':id') }}'.replace(':id', entrada.id) + '" method="POST">' +
+                                        '@csrf @method("DELETE")' +
+                                        '<button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>' +
+                                        '</form>'
                                     ]).draw(false).node();
                                 });
                             }
@@ -153,5 +148,4 @@
     });
 });
 </script>
-
 @stop

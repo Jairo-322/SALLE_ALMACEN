@@ -86,7 +86,10 @@
                                         articulo.estado,
                                         articulo.fecha_creacion,
                                         '<a href="" class="btn btn-warning" data-toggle="modal" data-target="#editModal' + articulo.id + '"><i class="fas fa-edit"></i></a>',
-                                        '<form action="{{ route('admin.articulo.destroy', ':id') }}".replace(":id", articulo.id) method="POST">@csrf @method('DELETE')<button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button></form>'
+                                        '<form action="' + '{{ route('admin.articulo.destroy', ':id') }}'.replace(':id', articulo.id) + '" method="POST">' +
+                                        '@csrf @method("DELETE")' +
+                                        '<button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>' +
+                                        '</form>'
                                     ]).draw(false);
                                 });
                             }
@@ -101,5 +104,6 @@
             });
         });
         </script>
+        
         
 @stop
