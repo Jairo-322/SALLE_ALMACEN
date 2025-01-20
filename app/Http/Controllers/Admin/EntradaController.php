@@ -126,7 +126,7 @@ class EntradaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    /*public function update(Request $request, string $id)
     {
         $validateData = $request->validate([
             'articulo_id' => 'required|exists:articulos,id',
@@ -153,7 +153,7 @@ class EntradaController extends Controller
         }else {
             return redirect()->back()->withErrors('No se actualizo correctamente la entrada.'. $entrada->getMessage());
         }
-    }
+    }*/
 
     /**
      * Remove the specified resource from storage.
